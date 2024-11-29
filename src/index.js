@@ -1,9 +1,11 @@
-const httpInstance = require("http")
+// const fs = require("fs")
+const http = require("http")
 
-const httpServer = httpInstance.createServer((req, res) => {
-  res.write("Reponse from server")
-  res.statusCode = 200
+const httpServer = http.createServer((req, res) => {
+  console.log(req.url)
 
+  res.writeHead(200, "success")
+  res.write("Response from server")
   res.end()
 })
 
