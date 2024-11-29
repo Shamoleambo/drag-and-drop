@@ -1,7 +1,10 @@
 const httpInstance = require("http")
 
 const httpServer = httpInstance.createServer((req, res) => {
-  
+  res.write("Reponse from server")
+  res.statusCode = 200
+
+  res.end()
 })
 
 httpServer.listen(8080, () => {
