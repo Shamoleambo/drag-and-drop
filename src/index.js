@@ -3,16 +3,14 @@ const http = require("http")
 
 const httpServer = http.createServer((req, res) => {
   if(req.url === "/") {
+    res.writeHead(200, "success", { "Content-Type":"text/html" })
     fs.readFile("./src/public/index.html", (error, data) => {
-      if(error) {
-        console.log(error)
-        res.writeHead(404, "No page for u")
-        res.write(`Sorrey, not sorry: ${error.code}`)
-        res.end()
-      } else {
-        res.writeHead(200, "Here is your page Sir!", { "Content-Type": "text/html" })
-        res.end(data, "utf-8")
-      }
+      res.end(data)
+    })
+  } else {
+    res.writeHead(404, "not found", { "Content-Type": "text/html" })
+    fs.readFile("./src/public/notFound.html", (error, data) => {
+      res.end(data)
     })
   }
 })
