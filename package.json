@@ -4,7 +4,8 @@
   "description": "drag and drop frontend project using vanilla js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Tiago Gomes",
   "license": "ISC",
@@ -12,6 +13,7 @@
     "@eslint/js": "^9.15.0",
     "eslint": "^9.15.0",
     "git-commit-msg-linter": "^5.0.8",
-    "globals": "^15.12.0"
+    "globals": "^15.12.0",
+    "nodemon": "^3.1.7"
   }
 }
