@@ -1,0 +1,11 @@
+{
+  "name": "drag-and-drop",
+  "version": "1.0.0",
+  "description": "drag and drop frontend project using vanilla js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tiago Gomes",
+  "license": "ISC"
+}
