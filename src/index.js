@@ -2,17 +2,18 @@ const fs = require("fs")
 const http = require("http")
 
 const httpServer = http.createServer((req, res) => {
-  if(req.url === "/") {
-    res.writeHead(200, "success", { "Content-Type":"text/html" })
-    fs.readFile("./src/public/index.html", (error, data) => {
+  const filePath = (req.url === "/" ? "./src/public/index.html" :`./src/public/${req.url}`)
+  fs.readFile(filePath, (error, data) => {
+    if(error) {
+      res.writeHead(404, { "Content-Type": "text/html" })
+      fs.readFile("./src/public/notFound.html", (err, data) => {
+        res.end(data)
+      })
+    } else {
+      res.writeHead(200, { "Content-Type": "text/html" })
       res.end(data)
-    })
-  } else {
-    res.writeHead(404, "not found", { "Content-Type": "text/html" })
-    fs.readFile("./src/public/notFound.html", (error, data) => {
-      res.end(data)
-    })
-  }
+    }
+  })
 })
 
 httpServer.listen(8080, () => {
