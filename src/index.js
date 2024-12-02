@@ -2,18 +2,27 @@ const fs = require("fs")
 const http = require("http")
 
 const httpServer = http.createServer((req, res) => {
-  const filePath = (req.url === "/" ? "./src/public/index.html" :`./src/public/${req.url}`)
-  fs.readFile(filePath, (error, data) => {
-    if(error) {
-      res.writeHead(404, { "Content-Type": "text/html" })
-      fs.readFile("./src/public/notFound.html", (err, data) => {
-        res.end(data)
-      })
-    } else {
+  const url = req.url
+  console.log(url)
+
+  if(url === "/") {
+    console.log("dentro")
+    fs.readFile("./src/public/index.html", (error, data) => {
+      console.log("dentro;dentro")
       res.writeHead(200, { "Content-Type": "text/html" })
       res.end(data)
-    }
-  })
+    })
+  } else if(url === "/styles/index.css") {
+    fs.readFile("./src/public/styles/index.css", (error, data) => {
+      res.writeHead(200, { "Content-Type" : "text/css" })
+      res.end(data)
+    })
+  } else {
+    fs.readFile("./src/public/notFound.html", (error, data)=> {
+      res.writeHead(404, { "content-Type": "txt/css" })
+      res.end(data)
+    })
+  }
 })
 
 httpServer.listen(8080, () => {
