@@ -52,7 +52,7 @@ main .drops {
     height: 70%;
 }
 
-#movable {
+.movable {
     width: 100px;
     height: 100px;
     border-radius: 100%;
