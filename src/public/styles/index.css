@@ -16,7 +16,8 @@ main {
 }
 
 main .start {
-    width: 30%;
+    margin: 1em;
+    width: 20%;
     height: 700px;
     display: flex;
     flex-direction: column;
@@ -25,8 +26,30 @@ main .start {
     border: 1px solid black;
 }
 
-main .drop-containers {
-    background-color: yellow;
+main .drops {
+    width: 80%;
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.drops .drop-container {
+    width: 70%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.drop-container .drop {
+    border: 1px solid black;
+    border-radius: 1em;
+    width: 100%;
+    height: 70%;
 }
 
 #movable {
