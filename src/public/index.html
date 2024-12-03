@@ -12,11 +12,11 @@
     <h1>Drag and drop</h1>
     <main>
         <div class="start">
-            <div class="movable" id="movable-1"></div>
-            <div class="movable" id="movable-2"></div>
-            <div class="movable" id="movable-3"></div>
-            <div class="movable" id="movable-4"></div>
-            <div class="movable" id="movable-5"></div>
+            <div draggable="true" class="movable" id="movable-1"></div>
+            <div draggable="true" class="movable" id="movable-2"></div>
+            <div draggable="true" class="movable" id="movable-3"></div>
+            <div draggable="true" class="movable" id="movable-4"></div>
+            <div draggable="true" class="movable" id="movable-5"></div>
         </div>
         <div class="drops">
             <div class="drop-container">
@@ -30,7 +30,15 @@
         </div>
     </main>
     <script>
-        console.log("Hello my friend!")
+        function dragstartHandler(ev) {
+            ev.dataTransfer.setData("text/plain", ev.target.id)
+        }
+
+        window.addEventListener("DOMContentLoader", () => {
+            const elements = document.getElementsByClassName("movable")
+
+            elements.forEach(el => el.addEventListener("dragstart", dragstartHandler))
+        })
     </script>
 </body>
 
