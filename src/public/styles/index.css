@@ -45,7 +45,7 @@ main .drops {
     justify-content: space-evenly;
 }
 
-.drop-container .drop {
+.drop-container .single-drop {
     border: 1px solid black;
     border-radius: 1em;
     width: 100%;
