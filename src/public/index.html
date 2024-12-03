@@ -32,13 +32,33 @@
     <script>
         function dragstartHandler(ev) {
             ev.dataTransfer.setData("text/plain", ev.target.id)
+            ev.dataTransfer.dropEffect = "move"
         }
 
-        window.addEventListener("DOMContentLoader", () => {
+        function dragoverHandler(ev) {
+            ev.preventDefault()
+            ev.dataTransfer.dropEffect = "move"
+        }
+
+        function dropHandler(ev) {
+            ev.preventDefault()
+            const data = ev.dataTransfer.getData("text/plain")
+            ev.target.appendChild(document.getElementById(data))
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
             const elements = document.getElementsByClassName("movable")
 
-            elements.forEach(el => el.addEventListener("dragstart", dragstartHandler))
+            for (let element of elements) {
+                element.addEventListener("dragstart", dragstartHandler)
+            }
         })
+
+        const drops = document.getElementsByClassName("single-drop")
+        for (let drop of drops) {
+            drop.addEventListener("drop", dropHandler)
+            drop.addEventListener("dragover", dragoverHandler)
+        }
     </script>
 </body>
 
