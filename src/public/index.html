@@ -20,11 +20,11 @@
         </div>
         <div class="drops">
             <div class="drop-container">
-                <h3 class="drop-counter">Drop 1: 0</h3>
+                <h3 class="drop-counter">Drop 1: <span id="counter-1" class="counter">0</span></h3>
                 <div class="single-drop single-drop-1"></div>
             </div>
             <div class="drop-container">
-                <h3 class="drop-counter">Drop 2: 0</h3>
+                <h3 class="drop-counter">Drop 2: <span id="counter-2" class="counter">0</span></h3>
                 <div class="single-drop single-drop-2"></div>
             </div>
         </div>
@@ -46,6 +46,15 @@
             ev.target.appendChild(document.getElementById(data))
         }
 
+        function counterHandler(ev) {
+            const counters = document.getElementsByClassName("counter")
+            for (let counter of counters) {
+                const singleDropCounter = counter.parentElement.parentElement.children[1]
+                const numberOfMovables = singleDropCounter.children.length
+                counter.innerHTML = numberOfMovables
+            }
+        }
+
         window.addEventListener("DOMContentLoaded", () => {
             const elements = document.getElementsByClassName("movable")
 
@@ -61,6 +70,12 @@
         }
         document.getElementById("start").addEventListener("drop", dropHandler)
         document.getElementById("start").addEventListener("dragover", dragoverHandler)
+
+        const dropContainers = document.getElementsByClassName("drop-container")
+        for (let container of dropContainers) {
+            container.addEventListener("dragend", counterHandler)
+        }
+        document.getElementById("start").addEventListener("dragend", counterHandler)
     </script>
 </body>
 
