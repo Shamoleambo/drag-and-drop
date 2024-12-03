@@ -50,6 +50,13 @@ main .drops {
     border-radius: 1em;
     width: 100%;
     height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-drop .movable {
+    margin: 1em;
 }
 
 .movable {
