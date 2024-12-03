@@ -11,21 +11,21 @@
 <body>
     <h1>Drag and drop</h1>
     <main>
-        <div id="start" class="start">
-            <div draggable="true" class="movable" id="movable-1"></div>
-            <div draggable="true" class="movable" id="movable-2"></div>
-            <div draggable="true" class="movable" id="movable-3"></div>
-            <div draggable="true" class="movable" id="movable-4"></div>
-            <div draggable="true" class="movable" id="movable-5"></div>
+        <div id="start" class="start dropable">
+            <div draggable="true" class="movable no-drop" id="movable-1"></div>
+            <div draggable="true" class="movable no-drop" id="movable-2"></div>
+            <div draggable="true" class="movable no-drop" id="movable-3"></div>
+            <div draggable="true" class="movable no-drop" id="movable-4"></div>
+            <div draggable="true" class="movable no-drop" id="movable-5"></div>
         </div>
         <div class="drops">
             <div class="drop-container">
                 <h3 class="drop-counter">Drop 1: <span id="counter-1" class="counter">0</span></h3>
-                <div class="single-drop single-drop-1"></div>
+                <div class="single-drop dropable single-drop-1"></div>
             </div>
             <div class="drop-container">
                 <h3 class="drop-counter">Drop 2: <span id="counter-2" class="counter">0</span></h3>
-                <div class="single-drop single-drop-2"></div>
+                <div class="single-drop dropable single-drop-2"></div>
             </div>
         </div>
     </main>
@@ -41,9 +41,14 @@
         }
 
         function dropHandler(ev) {
-            ev.preventDefault()
-            const data = ev.dataTransfer.getData("text/plain")
-            ev.target.appendChild(document.getElementById(data))
+            if (ev.target.classList.contains("no-drop")) {
+                ev.preventDefault()
+            } else {
+                const data = ev.dataTransfer.getData("text/plain")
+                const element = document.getElementById(data)
+                ev.preventDefault()
+                ev.target.appendChild(element)
+            }
         }
 
         function counterHandler(ev) {
@@ -63,19 +68,12 @@
             }
         })
 
-        const drops = document.getElementsByClassName("single-drop")
+        const drops = document.getElementsByClassName("dropable")
         for (let drop of drops) {
             drop.addEventListener("drop", dropHandler)
             drop.addEventListener("dragover", dragoverHandler)
+            drop.addEventListener("dragend", counterHandler)
         }
-        document.getElementById("start").addEventListener("drop", dropHandler)
-        document.getElementById("start").addEventListener("dragover", dragoverHandler)
-
-        const dropContainers = document.getElementsByClassName("drop-container")
-        for (let container of dropContainers) {
-            container.addEventListener("dragend", counterHandler)
-        }
-        document.getElementById("start").addEventListener("dragend", counterHandler)
     </script>
 </body>
 
