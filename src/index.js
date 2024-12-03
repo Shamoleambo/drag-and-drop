@@ -3,12 +3,9 @@ const http = require("http")
 
 const httpServer = http.createServer((req, res) => {
   const url = req.url
-  console.log(url)
 
   if(url === "/") {
-    console.log("dentro")
     fs.readFile("./src/public/index.html", (error, data) => {
-      console.log("dentro;dentro")
       res.writeHead(200, { "Content-Type": "text/html" })
       res.end(data)
     })
